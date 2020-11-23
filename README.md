@@ -20,4 +20,4 @@ __Default connections:__
 Two buttons are used to set the time.
 * The __SET__ button is required to switch 3 modes: __IDLE__, __SET MIN__, __SET HOUR__. When entering the setting mode, the seconds are reset.
 * The __UP__ button is needed to increase the clock. When the maximum value is reached, a reset occurs (looped).
-![clock](https://giphy.com/gifs/92JcQXMQElFpJXx4Qa/html5)
+![clock](https://media.giphy.com/media/92JcQXMQElFpJXx4Qa/giphy.gif)
