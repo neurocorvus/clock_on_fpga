@@ -31,16 +31,16 @@ module clock_top
     wire    [3:0]   w_Units_Hour;
     wire    [1:0]   w_Tens_Hour;
 
+    wire    [3:0]   w_Enable_Digits;
+    wire            w_Enable_Dot;
+    
     assign w_Enable_Count_Sec = w_Counters_Enable_Count[0] & w_Enable_Clock_Count_Sec;
 	assign w_Enable_Increment = w_Counters_Enable_Increment & w_Released_Button_Up;
 
-    wire    [3:0]   w_Enable_Digits;
-    wire            w_Enable_Dot;
-
-    assign w_Enable_Digits[0]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[1]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[2]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
-    assign w_Enable_Digits[3]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+    assign w_Enable_Digits[0] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[1] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[2] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+    assign w_Enable_Digits[3] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
 
     assign w_Enable_Dot         = w_Display_Blink_Dot & w_Display_Enable_Dot;
 
