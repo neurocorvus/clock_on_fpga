@@ -61,6 +61,7 @@ module display
     assign w_Enable_Digits[3] = i_Enable_Digits[0] & r_Digits[3];
 
     assign o_Digits[3:0]    = w_Enable_Digits[3:0];
+    
     assign o_Segments[6:0]  = r_Segments[6:0];
     assign o_Segments[7]    = i_Enable_Dot & i_Select[0] & ~i_Select[1]; 
 

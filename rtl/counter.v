@@ -26,7 +26,7 @@ module counter
         end
     end
 
-    assign o_Data[c_WIDTH-1:0] = r_Counter[c_WIDTH-1:0];
-    assign o_Carry = i_Enable_Count & (r_Counter == c_RESET_VALUE);
+    assign o_Data[c_WIDTH-1:0]  = r_Counter[c_WIDTH-1:0];
+    assign o_Carry              = i_Enable_Count & (r_Counter == c_RESET_VALUE);
 
 endmodule

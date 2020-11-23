@@ -9,40 +9,6 @@ module clock_top
 );
 
     wire            w_Released_Button_Set;
-    wire            w_Released_Button_Up;
-
-    wire    [1:0]   w_Display_Clock;
-    wire            w_Display_Blink_Digits;
-    wire            w_Display_Blink_Dot;
-    wire            w_Enable_Clock_Count_Sec;
-
-    wire            w_Counters_Reset_Sec;
-    wire            w_Counters_Enable_Increment;
-    wire    [2:0]   w_Counters_Enable_Count;
-    wire    [1:0]   w_Display_Enable_Digits;
-    wire            w_Display_Enable_Dot;
-
-    wire            w_Enable_Increment;
-    wire            w_Enable_Count_Sec;
-    wire    [3:0]   w_Units_Sec;
-    wire    [2:0]   w_Tens_Sec;
-    wire    [3:0]   w_Units_Min;
-    wire    [2:0]   w_Tens_Min;
-    wire    [3:0]   w_Units_Hour;
-    wire    [1:0]   w_Tens_Hour;
-
-    wire    [3:0]   w_Enable_Digits;
-    wire            w_Enable_Dot;
-    
-    assign w_Enable_Count_Sec = w_Counters_Enable_Count[0] & w_Enable_Clock_Count_Sec;
-	assign w_Enable_Increment = w_Counters_Enable_Increment & w_Released_Button_Up;
-
-    assign w_Enable_Digits[0] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[1] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[2] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
-    assign w_Enable_Digits[3] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
-
-    assign w_Enable_Dot         = w_Display_Blink_Dot & w_Display_Enable_Dot;
 
     button_debounce                     BUTTON_SET
     (
@@ -52,6 +18,8 @@ module clock_top
         .o_Released_Button              (w_Released_Button_Set)
     );
 
+    wire            w_Released_Button_Up;
+
     button_debounce                     BUTTON_UP
     (
         .i_Clock                        (i_Clock),
@@ -59,6 +27,11 @@ module clock_top
 
         .o_Released_Button              (w_Released_Button_Up)
     );
+
+    wire    [1:0]   w_Display_Clock;
+    wire            w_Display_Blink_Digits;
+    wire            w_Display_Blink_Dot;
+    wire            w_Enable_Clock_Count_Sec;
 
     clock_master                        CLOCK_MASTER
     (
@@ -70,6 +43,12 @@ module clock_top
         .o_Clock_1Hz                    (w_Display_Blink_Dot),
         .o_Enable_Clock_1Hz             (w_Enable_Clock_Count_Sec)
     );
+
+    wire            w_Counters_Reset_Sec;
+    wire            w_Counters_Enable_Increment;
+    wire    [2:0]   w_Counters_Enable_Count;
+    wire    [1:0]   w_Display_Enable_Digits;
+    wire            w_Display_Enable_Dot;
 
     control_unit                        CONTROL_UNIT
     (
@@ -83,6 +62,18 @@ module clock_top
         .o_Display_Enable_Digits        (w_Display_Enable_Digits),
         .o_Display_Enable_Dot           (w_Display_Enable_Dot)
     );
+
+    assign w_Enable_Count_Sec = w_Counters_Enable_Count[0] & w_Enable_Clock_Count_Sec;
+	assign w_Enable_Increment = w_Counters_Enable_Increment & w_Released_Button_Up;
+
+    wire            w_Enable_Increment;
+    wire            w_Enable_Count_Sec;
+    wire    [3:0]   w_Units_Sec;
+    wire    [2:0]   w_Tens_Sec;
+    wire    [3:0]   w_Units_Min;
+    wire    [2:0]   w_Tens_Min;
+    wire    [3:0]   w_Units_Hour;
+    wire    [1:0]   w_Tens_Hour;
 
     clock_counters                      CLOCK_COUNTERS
     (
@@ -104,6 +95,16 @@ module clock_top
         .o_Units_Hour                   (w_Units_Hour),
         .o_Tens_Hour                    (w_Tens_Hour)
     );
+
+    wire    [3:0]   w_Enable_Digits;
+    wire            w_Enable_Dot;
+
+    assign w_Enable_Digits[0] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[1] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[2] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+    assign w_Enable_Digits[3] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+
+    assign w_Enable_Dot         = w_Display_Blink_Dot & w_Display_Enable_Dot;
 
     display                             DISPLAY
     (
