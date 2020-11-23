@@ -18,5 +18,5 @@ __Default connections:__
 * Output display: common cathode indicators. Inverters are needed for the common anode
 ## Settings time
 Two buttons are used to set the time.
-* The __SET__ button is required to switch 3 modes: IDLE, SET MIN, SET HOUR. When entering the setting mode, the seconds are reset.
+* The __SET__ button is required to switch 3 modes: __IDLE__, __SET MIN__, __SET HOUR__. When entering the setting mode, the seconds are reset.
 * The __UP__ button is needed to increase the clock. When the maximum value is reached, a reset occurs (looped).
