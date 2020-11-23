@@ -1,1 +1,1 @@
-# clock_on_fpga
+# Simple clock on FPGA
