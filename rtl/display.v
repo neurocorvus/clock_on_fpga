@@ -49,7 +49,8 @@ module display
 
     // Enable dot
     assign o_Segments[7]    = i_Enable_Dot & i_Select[0] & ~i_Select[1];
-    
+
+    // Assign output segments
     assign o_Segments[6:0]  = r_Segments[6:0];
 
     // Decoder 2 to 4
@@ -63,11 +64,13 @@ module display
         endcase
     end
 
+    // Enable digits
     assign w_Enable_Digits[0] = i_Enable_Digits[3] & r_Digits[0];
     assign w_Enable_Digits[1] = i_Enable_Digits[2] & r_Digits[1];
     assign w_Enable_Digits[2] = i_Enable_Digits[1] & r_Digits[2];
     assign w_Enable_Digits[3] = i_Enable_Digits[0] & r_Digits[3];
 
+    // Assign output digits
     assign o_Digits[3:0]    = w_Enable_Digits[3:0];
 
 endmodule
