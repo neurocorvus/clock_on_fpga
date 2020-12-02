@@ -8,6 +8,8 @@ module clock_top
     output  [3:0]   o_Digits
 );
 
+    //--------------------BUTTON_SET--------------------//
+
     wire            w_Released_Button_Set;
 
     button_debounce                     BUTTON_SET
@@ -18,6 +20,8 @@ module clock_top
         .o_Released_Button              (w_Released_Button_Set)
     );
 
+    //--------------------BUTTON_UP--------------------//
+
     wire            w_Released_Button_Up;
 
     button_debounce                     BUTTON_UP
@@ -27,6 +31,8 @@ module clock_top
 
         .o_Released_Button              (w_Released_Button_Up)
     );
+
+    //--------------------CLOCK_MASTER--------------------//
 
     wire    [1:0]   w_Display_Clock;
     wire            w_Display_Blink_Digits;
@@ -43,6 +49,8 @@ module clock_top
         .o_Clock_1Hz                    (w_Display_Blink_Dot),
         .o_Enable_Clock_1Hz             (w_Enable_Clock_Count_Sec)
     );
+
+    //--------------------CONTROL_UNIT--------------------//
 
     wire            w_Counters_Reset_Sec;
     wire            w_Counters_Enable_Increment;
@@ -64,7 +72,10 @@ module clock_top
     );
 
     assign w_Enable_Count_Sec = w_Counters_Enable_Count[0] & w_Enable_Clock_Count_Sec;
+
 	assign w_Enable_Increment = w_Counters_Enable_Increment & w_Released_Button_Up;
+
+    //--------------------CLOCK_COUNTERS--------------------//
 
     wire            w_Enable_Increment;
     wire            w_Enable_Count_Sec;
@@ -96,13 +107,15 @@ module clock_top
         .o_Tens_Hour                    (w_Tens_Hour)
     );
 
+    //--------------------DISPLAY--------------------//
+
     wire    [3:0]   w_Enable_Digits;
     wire            w_Enable_Dot;
 
-    assign w_Enable_Digits[0] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[1] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
-    assign w_Enable_Digits[2] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
-    assign w_Enable_Digits[3] = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+    assign w_Enable_Digits[0]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[1]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[0]);
+    assign w_Enable_Digits[2]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
+    assign w_Enable_Digits[3]   = ~(w_Display_Blink_Digits & w_Display_Enable_Digits[1]);
 
     assign w_Enable_Dot         = w_Display_Blink_Dot & w_Display_Enable_Dot;
 
