@@ -8,7 +8,7 @@ module control_unit
     output  [2:0]   o_Counters_Enable_Count,
 
     output  [1:0]   o_Display_Enable_Digits,
-	output          o_Display_Enable_Dot
+    output          o_Display_Enable_Dot
 );
 
     localparam IDLE         = 2'b00;
