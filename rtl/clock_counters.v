@@ -23,6 +23,8 @@ module clock_counters
     localparam c_WIDTH_COUNTER_MOD5 = 3;
     localparam c_WIDTH_COUNTER_MOD3 = 2;
 
+    //--------------------COUNTERS_SEC--------------------//
+
     localparam c_RESET_UNITS_SEC = 4'd9;
     localparam c_RESET_TENS_SEC  = 3'd5;
 
@@ -54,6 +56,8 @@ module clock_counters
         .o_Data             (o_Tens_Sec),
         .o_Carry            (w_Carry_Tens_Sec)
     );
+
+    //--------------------COUNTERS_MIN--------------------//
 
     localparam c_RESET_UNITS_MIN = 4'd9;
     localparam c_RESET_TENS_MIN  = 3'd5;
@@ -88,6 +92,8 @@ module clock_counters
         .o_Data             (o_Tens_Min),
         .o_Carry            (w_Carry_Tens_Min)
     );
+
+    //--------------------COUNTERS_HOUR--------------------//
 
     localparam c_RESET_UNITS_HOUR = 4'd9;
     localparam c_RESET_TENS_HOUR  = 2'd3;
