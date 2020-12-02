@@ -20,6 +20,7 @@ module display
 
     wire    [3:0]   w_Enable_Digits;
 
+    // 4-bit Multiplexer 4 to 1
     always @(*) begin
         case(i_Select)
             2'b00:  r_Data_Mux = i_Data_Dig1;
@@ -29,6 +30,7 @@ module display
         endcase
     end
 
+    // BCD to 7-Seg decoder
     always @(*) begin
         case(r_Data_Mux)
             4'b0000: r_Segments = 7'b011_1111;
@@ -45,6 +47,12 @@ module display
         endcase
     end
 
+    // Enable dot
+    assign o_Segments[7]    = i_Enable_Dot & i_Select[0] & ~i_Select[1];
+    
+    assign o_Segments[6:0]  = r_Segments[6:0];
+
+    // Decoder 2 to 4
     always @(*) begin
         case(i_Select)
             2'b00:      r_Digits = 4'b0001;
@@ -61,8 +69,5 @@ module display
     assign w_Enable_Digits[3] = i_Enable_Digits[0] & r_Digits[3];
 
     assign o_Digits[3:0]    = w_Enable_Digits[3:0];
-    
-    assign o_Segments[6:0]  = r_Segments[6:0];
-    assign o_Segments[7]    = i_Enable_Dot & i_Select[0] & ~i_Select[1]; 
 
 endmodule
