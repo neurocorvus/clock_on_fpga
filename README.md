@@ -1,7 +1,6 @@
 # Simple clock on FPGA
 This is a simple FPGA clock. They support 4-bit time output to a multiplexed display and full time setting.
 ## Architecture
-![clock_architecture](https://github.com/neurocorvus/clock_on_fpga/blob/master/clock_architecture.png)
 ## Module interface
 ```verilog
 clock_top
